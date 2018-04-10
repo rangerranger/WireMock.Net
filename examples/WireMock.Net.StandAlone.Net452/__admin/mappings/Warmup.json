@@ -1,0 +1,132 @@
+{
+  "Guid": "615df759-a6ec-4845-b14d-50e86c22f48a",
+  "Title": "",
+  "Priority": 0,
+  "Request": {
+    "Path": {
+      "Matchers": [
+        {
+          "Name": "RegexMatcher",
+          "Pattern": "/api/beta/me/search/?$|/api/beta/me/search/.*$",
+          "IgnoreCase": false
+        }
+      ]
+    },
+    "Methods": [
+      "post"
+    ],
+    "Headers": [
+      {
+        "Name": "Content-Type",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json",
+            "IgnoreCase": true
+          }
+        ]
+      },
+      {
+        "Name": "Accept",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "application/json; odata.metadata=none",
+            "IgnoreCase": true
+          }
+        ]
+      },
+      {
+        "Name": "Authorization",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkZTaW11RnJGTm9DMHNKWEdtdjEzbk5aY2VEYyIsImtpZCI6IkZTaW11RnJGTm9DMHNKWEdtdjEzbk5aY2VEYyJ9.eyJhdWQiOiJodHRwczovL291dGxvb2sub2ZmaWNlLmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzcyZjk4OGJmLTg2ZjEtNDFhZi05MWFiLTJkN2NkMDExZGI0Ny8iLCJpYXQiOjE1MjMzMDU0NTgsIm5iZiI6MTUyMzMwNTQ1OCwiZXhwIjoxNTIzMzA5MzU4LCJhY3IiOiIxIiwiYWlvIjoiQVVRQXUvOEdBQUFBMnNVQm1uUWJrd0tqZEE5ZDJXeXVCVTBWTVlIbWxhc0FmdlN1akl0d0pnMGlhZGlHL2Jac1B1OFJNdFBFcVcrTnpSdkNSc2drVXR5TjRZb1BwbHZ6c0E9PSIsImFtciI6WyJyc2EiLCJtZmEiXSwiYXBwX2Rpc3BsYXluYW1lIjoiT0F1dGggU2FuZGJveCIsImFwcGlkIjoiMzI2MTNmYzUtZTdhYy00ODk0LWFjOTQtZmJjMzljOWYzZTRhIiwiYXBwaWRhY3IiOiIxIiwiZGV2aWNlaWQiOiJiODc3YTg2Ni1hZTRjLTRlMjUtYjg5My02Yjk2NTY2MTQ5YzMiLCJlX2V4cCI6MjYyODAwLCJlbmZwb2xpZHMiOlsiNTk4NzYzMzgtODE1ZS00MWU2LTk2MTMtMGVjNjIxOGU1YzJkIiwiZDE4OGNmNjMtNjZhOC00Y2ZiLWJlZmMtNTI4NzM5MTY2YjIwIl0sImZhbWlseV9uYW1lIjoiTmF0YXJhaiIsImdpdmVuX25hbWUiOiJBcm9vbiIsImluX2NvcnAiOiJ0cnVlIiwiaXBhZGRyIjoiMTMxLjEwNy4xNDcuMTEwIiwibmFtZSI6IkFyb29uIE5hdGFyYWogKFplbjMpIiwib2lkIjoiYmY1Y2FhNGItNzVhNS00ZjkxLTgxODktN2Q4MmI0NzNmYjdjIiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTIxMjc1MjExODQtMTYwNDAxMjkyMC0xODg3OTI3NTI3LTI5MjA5MTgyIiwicHVpZCI6IjEwMDM3RkZFQTU3MjlEM0YiLCJzY3AiOiJDYWxlbmRhcnMuUmVhZFdyaXRlIENhbGVuZGFycy5SZWFkV3JpdGUuU2hhcmVkIENvbnRhY3RzLlJlYWRXcml0ZSBDb250YWN0cy5SZWFkV3JpdGUuU2hhcmVkIE1haWwuUmVhZFdyaXRlIE1haWwuUmVhZFdyaXRlLlNoYXJlZCBNYWlsLlNlbmQgTWFpbC5TZW5kLlNoYXJlZCBNYWlsYm94U2V0dGluZ3MuUmVhZFdyaXRlIFBlb3BsZS5SZWFkIFRhc2tzLlJlYWRXcml0ZSBUYXNrcy5SZWFkV3JpdGUuU2hhcmVkIFVzZXIuUmVhZEJhc2ljLkFsbCIsInNpZ25pbl9zdGF0ZSI6WyJkdmNfbW5nZCIsImR2Y19jbXAiLCJkdmNfZG1qZCIsImttc2kiXSwic3ViIjoiNElzOUJyRWl4S1JSVm52TGdkQkdEbWk3cVM3Wm9Qb3dQbjVuOUhpMGJJQSIsInRpZCI6IjcyZjk4OGJmLTg2ZjEtNDFhZi05MWFiLTJkN2NkMDExZGI0NyIsInVuaXF1ZV9uYW1lIjoidi1hcm9uYXRAbWljcm9zb2Z0LmNvbSIsInVwbiI6InYtYXJvbmF0QG1pY3Jvc29mdC5jb20iLCJ1dGkiOiJ1djV6YWw2ZUJVaVNxSEo5SjZrbEFBIiwidmVyIjoiMS4wIn0.RsSa1pxLQhmRFO2BcAJKMjhKKyvesTeFAAxnOuBEx3lBycEBbKywEYQWF4VCH7Y1dkYDMNt44cLcry1GHBaawcIIYcroEoRNnu1_OIXUPhqoGEHkgftGfPWhVGyJdF_TbGKwOCFLbp_DBZWdXpxliK246x9G-HnXxnPOe_Rn2YGEFlM4SuQ7NVlVnWV37pyjp3UhY7GcyxMsawyYygIija4WAv9pMZxASVJlvfhh42fFzSQInjS0fq5Cf2XG96tH82Y2rAkniR5Dx6RKmnti0ginRaHiFA0TMK3Uzia0TSPruAds5vHyE41vPGmjzIETSoMWrQSZrWQPfopaVZDtHw",
+            "IgnoreCase": false
+          }
+        ]
+      },
+      {
+        "Name": "Host",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "localhost:9091",
+            "IgnoreCase": true
+          }
+        ]
+      },
+      {
+        "Name": "Content-Length",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "118",
+            "IgnoreCase": true
+          }
+        ]
+      },
+      {
+        "Name": "Prefer",
+        "Matchers": [
+          {
+            "Name": "WildcardMatcher",
+            "Pattern": "exchange.behavior=\"CustomSearchAction,CustomSearchActionNewSchemas,OpenComplexTypeExtensions\"",
+            "IgnoreCase": true
+          }
+        ]
+      }
+    ],
+    "Body": {
+      "Matcher": {
+          "Name": "JsonExactMatcher",
+          "Pattern": "{  Scope: [    {      Sources: [        {          Shard: \"beta04\"        }      ]    }  ]}"
+        }
+    }
+  },
+  "Response": {
+    "StatusCode": 201,
+    "BodyAsJson": {
+      "Id": "051f50f8-d10e-47ac-afba-7c88cccc2904",
+      "SessionId": "051f50f8-d10e-47ac-afba-7c88cccc2904"
+    },
+    "BodyEncoding": {
+      "CodePage": 65001,
+      "EncodingName": "Unicode (UTF-8)",
+      "WebName": "utf-8"
+    },
+    "UseTransformer": false,
+    "Headers": {
+      "X-MSEdge-Ref": "Ref A: 8BB20F919ED84E68B348E61D4B74D722 Ref B: CO1EDGE0311 Ref C: 2018-04-09T20:33:55Z",
+      "X-Powered-By": "ASP.NET",
+      "OData-Version": "4.0",
+      "Cache-Control": "private",
+      "X-FEServer": [
+        "DM5PR1501CA0025",
+        "MWHPR15CA0058"
+      ],
+      "X-AspNet-Version": "4.0.30319",
+      "x-ms-appId": "32613fc5-e7ac-4894-ac94-fbc39c9f3e4a",
+      "X-RUM-Validated": "1",
+      "X-CalculatedFETarget": "DM5PR1501CU001.internal.outlook.com",
+      "X-CalculatedBETarget": "DM5PR2101MB0919.namprd21.prod.outlook.com",
+      "X-FEProxyInfo": "DM5PR1501CA0025.NAMPRD15.PROD.OUTLOOK.COM",
+      "Rate-Limit-Reset": "2018-04-09T20:39:46.956Z",
+      "Preference-Applied": "exchange.behavior=\"CustomSearchAction,CustomSearchActionNewSchemas,OpenComplexTypeExtensions\"",
+      "Rate-Limit-Remaining": "9997",
+      "X-BEServer": "DM5PR2101MB0919",
+      "request-id": "f6949845-b29b-4022-9c79-3d4c8549f361",
+      "X-DiagInfo": "DM5PR2101MB0919",
+      "Set-Cookie": "exchangecookie=a268c71d43b44411811805f0af49542e; expires=Tue, 09-Apr-2019 20:33:55 GMT; path=/; HttpOnly",
+      "Rate-Limit-Limit": "10000",
+      "X-BackEndHttpStatus": [
+        "201",
+        "201"
+      ],
+      "Location": "http://localhost:9091/api/beta/Users('bf5caa4b-75a5-4f91-8189-7d82b473fb7c@72f988bf-86f1-41af-91ab-2d7cd011db47')/SearchSessions('051f50f8-d10e-47ac-afba-7c88cccc2904')",
+      "Date": "Mon, 09 Apr 2018 20:33:54 GMT",
+      "Content-Type": "application/json; odata.metadata=none; odata.streaming=true; IEEE754Compatible=false; charset=utf-8",
+      "Transfer-Encoding": "chunked"
+    }
+  }
+}

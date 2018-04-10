@@ -32,6 +32,9 @@ namespace WireMock.Serialization
                 case "JsonPathMatcher":
                     return new JsonPathMatcher(patterns);
 
+                case "JsonExactMatcher":
+                    return new JsonExactMatcher(patterns);
+
                 case "XPathMatcher":
                     return new XPathMatcher(matcher.Pattern);
 

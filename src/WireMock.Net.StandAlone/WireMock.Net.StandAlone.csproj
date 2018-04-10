@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Lightweight StandAlone Http Mocking Server for .Net.</Description>
+    <Description>Lightweight StandAlone Http Mocking Server for .Net. Added JsonExactMatcher in WireMock.Net</Description>
     <AssemblyTitle>WireMock.Net.StandAlone</AssemblyTitle>
-    <Version>1.0.3.15</Version>
+    <Version>1.0.3.16</Version>
     <Authors>Stef Heyenrath</Authors>
     <TargetFrameworks>net452;net46;netstandard1.3;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -21,6 +21,8 @@
     <DebugType>full</DebugType>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
+    <Platforms>AnyCPU;x64</Platforms>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

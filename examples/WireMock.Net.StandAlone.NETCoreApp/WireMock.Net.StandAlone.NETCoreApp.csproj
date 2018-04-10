@@ -1,9 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFrameworks>netcoreapp2.0;netcoreapp1.1</TargetFrameworks>
     <ApplicationIcon>../../WireMock.Net-Logo.ico</ApplicationIcon>
+    <Platforms>AnyCPU;x64</Platforms>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>

@@ -713,8 +713,8 @@ namespace WireMock.Server
                 foreach (var entry in responseModel.Headers)
                 {
                     responseBuilder = entry.Value is string value ?
-                        responseBuilder.WithHeader(entry.Key, value) :
-                        responseBuilder.WithHeader(entry.Key, JsonUtils.ParseJTokenToObject<string[]>(entry.Value));
+                        responseBuilder.WithHeader(entry.Key, value) : ( entry.Value is System.DateTime val ? responseBuilder.WithHeader(entry.Key, val.ToString()) : 
+                        responseBuilder.WithHeader(entry.Key, JsonUtils.ParseJTokenToObject<string[]>(entry.Value)));
                 }
             }
             else if (responseModel.HeadersRaw != null)
