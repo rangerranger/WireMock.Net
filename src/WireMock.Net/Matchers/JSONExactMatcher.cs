@@ -27,8 +27,21 @@ namespace WireMock.Matchers
             int i = 0;
             foreach(string json in jsons)
             {
-                _jsons[i] = "" + JsonConvert.DeserializeObject(json);
+                _jsons[i] = "" + JsonConvert.DeserializeObject(json, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.None, ContractResolver = null });
             }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JsonExactMatcher"/> class.
+        /// </summary>
+        /// <param name="jsons">The json values.</param>
+        public JsonExactMatcher([NotNull] object jsonObject)
+        {
+            Check.NotNull(jsonObject, nameof(jsonObject));
+            
+            _jsons = new string[1];
+            JObject jobj = JObject.FromObject(jsonObject);
+            _jsons[0] = JsonConvert.SerializeObject(jobj, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.None, ContractResolver = null });
         }
 
         /// <inheritdoc cref="IStringMatcher.IsMatch"/>

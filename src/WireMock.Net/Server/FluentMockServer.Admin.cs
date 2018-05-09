@@ -214,7 +214,7 @@ namespace WireMock.Server
 
                 if (settings.SaveMappingToFile)
                 {
-                    SaveMappingToFile(mapping);
+                    SaveMappingToFile(mapping, settings.SaveMappingsFolder);
                 }
             }
 
@@ -242,6 +242,13 @@ namespace WireMock.Server
             if (requestMessage.Body != null)
             {
                 request.WithBody(new ExactMatcher(requestMessage.Body));
+            } else if(requestMessage.BodyAsJson != null)
+            {
+                //request.WithBody(new JsonExactMatcher(requestMessage.BodyAsJson));
+                request.WithBody(new JsonRegExMatcher(requestMessage.BodyAsJson));
+            } else if (requestMessage.BodyAsBytes != null)
+            {
+                request.WithBody(new ExactObjectMatcher(requestMessage.BodyAsBytes));
             }
 
             var response = Response.Create(responseMessage);
@@ -335,9 +342,13 @@ namespace WireMock.Server
             return new ResponseMessage { Body = "Mappings saved to disk" };
         }
 
-        private void SaveMappingToFile(Mapping mapping)
+        private void SaveMappingToFile(Mapping mapping, [CanBeNull] string folder = null)
         {
-            string folder = Path.Combine(Directory.GetCurrentDirectory(), AdminMappingsFolder);
+            if (folder == null)
+            {
+                folder = Path.Combine(Directory.GetCurrentDirectory(), AdminMappingsFolder);
+            }
+
             if (!Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);

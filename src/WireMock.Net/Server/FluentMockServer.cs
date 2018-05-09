@@ -221,12 +221,12 @@ namespace WireMock.Server
 
             if (settings.ReadStaticMappings == true)
             {
-                ReadStaticMappings();
+                ReadStaticMappings(settings.StaticMappingsFolder);
             }
 
             if (settings.WatchStaticMappings == true)
             {
-                WatchStaticMappings();
+                WatchStaticMappings(settings.StaticMappingsFolder);
             }
 
             if (settings.ProxyAndRecordSettings != null)

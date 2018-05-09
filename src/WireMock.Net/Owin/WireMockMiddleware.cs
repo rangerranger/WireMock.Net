@@ -98,6 +98,7 @@ namespace WireMock.Owin
                     logRequest = true;
                     _options.Logger.Warn("HttpStatusCode set to 404 : No matching mapping found");
                     response = new ResponseMessage { StatusCode = 404, Body = "No matching mapping found" };
+                    //response = new ResponseMessage { StatusCode = 200, Body = "No matching mapping found" };
                     return;
                 }
 
@@ -125,6 +126,8 @@ namespace WireMock.Owin
                 {
                     _options.Scenarios[targetMapping.Scenario] = targetMapping.NextState;
                 }
+
+                _options.Logger.Warn("Matching mapping found.");
             }
             catch (Exception ex)
             {

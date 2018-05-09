@@ -19,6 +19,10 @@ namespace WireMock.Settings
         [PublicAPI]
         public bool SaveMappingToFile { get; set; } = true;
 
+        /// <inheritdoc cref="IProxyAndRecordSettings.SaveMappingsFolder"/>
+        [PublicAPI]
+        public string SaveMappingsFolder { get; set; }
+
         /// <inheritdoc cref="IProxyAndRecordSettings.ClientX509Certificate2ThumbprintOrSubjectName"/>
         [PublicAPI]
         public string ClientX509Certificate2ThumbprintOrSubjectName { get; set; }

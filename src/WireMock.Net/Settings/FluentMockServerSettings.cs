@@ -27,6 +27,12 @@ namespace WireMock.Settings
         [PublicAPI]
         public bool? ReadStaticMappings { get; set; }
 
+        /// <summary>
+        /// Gets or sets if the static mappings should be read at startup.
+        /// </summary>
+        [PublicAPI]
+        public string StaticMappingsFolder { get; set; }
+
         /// <inheritdoc cref="IFluentMockServerSettings.WatchStaticMappings"/>
         [PublicAPI]
         public bool? WatchStaticMappings { get; set; }
