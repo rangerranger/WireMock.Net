@@ -13,6 +13,11 @@ namespace WireMock.Admin.Mappings
         public Guid? Guid { get; set; }
 
         /// <summary>
+        /// Gets or sets the boolean that controls if this mapping will be logged when it fails to match with a query
+        /// </summary>
+        public Boolean LogOnMatchFail { get; set; }
+
+        /// <summary>
         /// The unique title.
         /// </summary>
         public string Title { get; set; }

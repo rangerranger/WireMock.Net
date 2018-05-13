@@ -23,7 +23,8 @@ namespace WireMock.Util
                 }
             }
 
-            throw new IOException();
+            return File.ReadAllText(path);
+            //throw new IOException();
         }
     }
 }

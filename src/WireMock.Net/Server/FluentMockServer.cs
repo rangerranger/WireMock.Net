@@ -176,6 +176,7 @@ namespace WireMock.Server
             _options.PreWireMockMiddlewareInit = settings.PreWireMockMiddlewareInit;
             _options.PostWireMockMiddlewareInit = settings.PostWireMockMiddlewareInit;
             _options.Logger = _logger;
+            _options.TrafficLogFile = settings.TrafficLogFile;
 
 #if NETSTANDARD
             _httpServer = new AspNetCoreSelfHost(_options, Urls);
@@ -270,6 +271,13 @@ namespace WireMock.Server
             if (_httpServer != null && _httpServer.IsStarted)
             {
                 _httpServer.StopAsync();
+            }
+
+            if (_watcher != null)
+            {
+                _watcher.EnableRaisingEvents = false;
+                _watcher.Dispose();
+                _watcher = null;
             }
         }
 

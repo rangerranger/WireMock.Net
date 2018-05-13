@@ -45,6 +45,8 @@ namespace WireMock.Server
             NullValueHandling = NullValueHandling.Ignore,
         };
 
+        private EnhancedFileSystemWatcher _watcher = null;
+
         #region InitAdmin
         private void InitAdmin()
         {
@@ -133,25 +135,33 @@ namespace WireMock.Server
 
             if (!Directory.Exists(folder))
             {
-                return;
+                _logger.Warn("Mapping folder '{0}' does NOT exist. Will try creating.", folder);
+                try
+                {
+                    Directory.CreateDirectory(folder);
+                } catch (Exception e)
+                {
+                    _logger.Warn("Failed creation of mapping folder '{0}' with Exception: '{1}'", folder, e.Message);
+                    return;
+                }
             }
 
-            _logger.Info("Watching folder '{0}' for new, updated and deleted MappingFiles.", folder);
+            _logger.Debug("Attempting to create watcher for folder '{0}' for new, updated, deleted and renamed MappingFiles.", folder);
 
-            var watcher = new EnhancedFileSystemWatcher(folder, "*.json", 1000);
-            watcher.Created += (sender, args) =>
+            _watcher = new EnhancedFileSystemWatcher(folder, "*.json", 1000);
+            _watcher.Created += (sender, args) =>
             {
-                _logger.Info("New MappingFile created : '{0}'", args.FullPath);
+                _logger.Info("MappingFile created : '{0}'", args.FullPath);
                 ReadStaticMappingAndAddOrUpdate(args.FullPath);
             };
-            watcher.Changed += (sender, args) =>
+            _watcher.Changed += (sender, args) =>
             {
-                _logger.Info("New MappingFile updated : '{0}'", args.FullPath);
+                _logger.Info("MappingFile updated : '{0}'", args.FullPath);
                 ReadStaticMappingAndAddOrUpdate(args.FullPath);
             };
-            watcher.Deleted += (sender, args) =>
+            _watcher.Deleted += (sender, args) =>
             {
-                _logger.Info("New MappingFile deleted : '{0}'", args.FullPath);
+                _logger.Info("MappingFile deleted : '{0}'", args.FullPath);
                 string filenameWithoutExtension = Path.GetFileNameWithoutExtension(args.FullPath);
 
                 if (Guid.TryParse(filenameWithoutExtension, out Guid guidFromFilename))
@@ -163,8 +173,21 @@ namespace WireMock.Server
                     DeleteMapping(args.FullPath);
                 }
             };
+            _watcher.Renamed += (sender, args) =>
+            {
+                _logger.Info("MappingFile Renamed from : '{0}' to : '{1}'. Updating mapping.", args.OldFullPath, args.FullPath);
+                try
+                {
+                    ReadStaticMappingAndAddOrUpdate(args.FullPath);
+                } catch(System.IO.FileNotFoundException e)
+                {
+                    _logger.Info("MappingFile Renamed NOT found, ignoring (may be temporary file) : '{1}'. Ignoring mapping.", args.OldFullPath, args.FullPath);
+                }
+            };
 
-            watcher.EnableRaisingEvents = true;
+            _watcher.EnableRaisingEvents = true;
+
+            _logger.Info("Watching folder '{0}' for new, updated, deleted and renamed MappingFiles.", folder);
         }
 
         /// <summary>
@@ -441,6 +464,11 @@ namespace WireMock.Server
                 respondProvider = respondProvider.InScenario(mappingModel.Scenario);
                 respondProvider = respondProvider.WhenStateIs(mappingModel.WhenStateIs);
                 respondProvider = respondProvider.WillSetStateTo(mappingModel.SetStateTo);
+            }
+            
+            if(mappingModel.LogOnMatchFail)
+            {
+                respondProvider = respondProvider.WithLogOnMatchFail(true);
             }
 
             respondProvider.RespondWith(responseBuilder);

@@ -83,5 +83,10 @@ namespace WireMock.Settings
         [PublicAPI]
         [JsonIgnore]
         public IWireMockLogger Logger { get; set; } = new WireMockNullLogger();
+
+        /// <inheritdoc cref="IFluentMockServerSettings.TrafficLogFile"/>
+        [PublicAPI]
+        public string TrafficLogFile { get; set; }
+
     }
 }

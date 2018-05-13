@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace WireMock.Matchers.Request
@@ -43,13 +44,23 @@ namespace WireMock.Matchers.Request
         /// <summary>
         /// Gets the match details.
         /// </summary>
+        [JsonIgnore] 
         public IList<KeyValuePair<Type, double>> MatchDetails { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RequestMatchResult"/> class.
         /// </summary>
-        public RequestMatchResult() => MatchDetails = new List<KeyValuePair<Type, double>>();
+        public RequestMatchResult()
+        {
+            MatchDetails = new List<KeyValuePair<Type, double>>();
+            MatchDetailsFull = new List<KeyValuePair<KeyValuePair<Type, IRequestMatcher>, double>>();
+        }
 
+        /// <summary>
+        /// Gets the full match details inlcuding the matcher patterns.
+        /// </summary>
+        public IList<KeyValuePair<KeyValuePair<Type, IRequestMatcher>, double>> MatchDetailsFull { get; }
+        
         /// <summary>
         /// Adds the score.
         /// </summary>
@@ -66,6 +77,17 @@ namespace WireMock.Matchers.Request
         }
 
         /// <summary>
+        /// Adds the score.
+        /// </summary>
+        /// <param name="matcher">The matcher.</param>
+        /// <param name="score">The score.</param>
+        /// <returns>void</returns>
+        public void AddFullDetails(IRequestMatcher matcher, double score)
+        {
+            MatchDetailsFull.Add(new KeyValuePair<KeyValuePair<Type, IRequestMatcher>, double>(new KeyValuePair<Type, IRequestMatcher>(matcher.GetType(), matcher), score));
+        }
+
+        /// <summary>
         /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
         /// </summary>
         /// <param name="obj">An object to compare with this instance.</param>
@@ -78,5 +100,13 @@ namespace WireMock.Matchers.Request
 
             return compareObj.AverageTotalScore.CompareTo(AverageTotalScore);
         }
+
+        /// <summary>
+        /// Gets or sets whether logging is needed when match fails on this.
+        /// </summary>
+        /// <value>
+        /// The total number of matches.
+        /// </value>
+        public bool LogThis { get; set; }
     }
 }

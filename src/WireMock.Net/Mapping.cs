@@ -32,6 +32,11 @@ namespace WireMock
         public int Priority { get; }
 
         /// <summary>
+        /// Gets the logOnMatchFailure switch.
+        /// </summary>
+        public bool LogOnMatchFailure { get; }
+
+        /// <summary>
         /// Scenario.
         /// </summary>
         [CanBeNull]
@@ -77,7 +82,8 @@ namespace WireMock
         /// <param name="scenario">The scenario. [Optional]</param>
         /// <param name="executionConditionState">State in which the current mapping can occur. [Optional]</param>
         /// <param name="nextState">The next state which will occur after the current mapping execution. [Optional]</param>
-        public Mapping(Guid guid, [CanBeNull] string title, [CanBeNull] string path, IRequestMatcher requestMatcher, IResponseProvider provider, int priority, [CanBeNull] string scenario, [CanBeNull] object executionConditionState, [CanBeNull] object nextState)
+        /// <param name="logOnMatchFail">Should this log when match on this mapping fails? [Optional - Default: false]</param>
+        public Mapping(Guid guid, [CanBeNull] string title, [CanBeNull] string path, IRequestMatcher requestMatcher, IResponseProvider provider, int priority, [CanBeNull] string scenario, [CanBeNull] object executionConditionState, [CanBeNull] object nextState, bool logOnMatchFail = false)
         {
             Guid = guid;
             Title = title;
@@ -88,6 +94,7 @@ namespace WireMock
             Scenario = scenario;
             ExecutionConditionState = executionConditionState;
             NextState = nextState;
+            LogOnMatchFailure = logOnMatchFail;
         }
 
         /// <summary>
@@ -124,6 +131,14 @@ namespace WireMock
                 //    var matcher = new RequestMessageScenarioAndStateMatcher(nextState, ExecutionConditionState);
                 //    matcher.GetMatchingScore(requestMessage, result);
                 //}
+            }
+
+            if(LogOnMatchFailure)
+            {
+                if(!result.IsPerfectMatch)
+                {
+                    result.LogThis = true;
+                }
             }
 
             return result;

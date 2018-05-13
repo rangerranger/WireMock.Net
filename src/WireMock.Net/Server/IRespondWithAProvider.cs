@@ -16,6 +16,13 @@ namespace WireMock.Server
         IRespondWithAProvider WithGuid(Guid guid);
 
         /// <summary>
+        /// Define the LogOnMatchFail for this mapping.
+        /// </summary>
+        /// <param name="dologging">The bool LogOnMatchFail.</param>
+        /// <returns>The <see cref="IRespondWithAProvider"/>.</returns>
+        IRespondWithAProvider WithLogOnMatchFail(bool dologging);
+
+        /// <summary>
         /// Define a unique title for this mapping.
         /// </summary>
         /// <param name="title">The unique title.</param>

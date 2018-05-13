@@ -10,6 +10,12 @@ namespace WireMock.Settings
     public interface IFluentMockServerSettings
     {
         /// <summary>
+        /// The Traffic Logger filename
+        /// </summary>
+        [PublicAPI]
+        string TrafficLogFile { get; set; }
+
+        /// <summary>
         /// Gets or sets the port.
         /// </summary>
         [PublicAPI]
@@ -111,5 +117,6 @@ namespace WireMock.Settings
         /// </summary>
         [PublicAPI]
         IWireMockLogger Logger { get; set; }
+        
     }
 }

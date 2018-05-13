@@ -27,6 +27,8 @@ namespace WireMock.Owin
 
         public ObservableCollection<LogEntry> LogEntries { get; } = new ConcurentObservableCollection<LogEntry>();
 
+        public String TrafficLogFile { get; set; }
+
         public int? RequestLogExpirationDuration { get; set; }
 
         public int? MaxRequestLogCount { get; set; }

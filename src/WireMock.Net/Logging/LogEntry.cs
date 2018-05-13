@@ -9,6 +9,14 @@ namespace WireMock.Logging
     public class LogEntry
     {
         /// <summary>
+        /// Gets or sets Timestamp of event.
+        /// </summary>
+        /// <value>
+        /// Timestamp.
+        /// </value>
+        public DateTime Timestamp { get; set; }
+
+        /// <summary>
         /// Gets or sets the unique identifier.
         /// </summary>
         /// <value>

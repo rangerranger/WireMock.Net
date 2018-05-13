@@ -16,6 +16,7 @@ namespace WireMock.Server
         private object _executionConditionState;
         private object _nextState;
         private string _scenario;
+        private bool _logOnMatchFail;
         private readonly RegistrationCallback _registrationCallback;
         private readonly IRequestMatcher _requestMatcher;
 
@@ -31,13 +32,23 @@ namespace WireMock.Server
         }
 
         /// <summary>
+        /// Sets logging on match failure.
+        /// </summary>
+        /// <param name="dologging">The registration callback.</param>
+        public IRespondWithAProvider WithLogOnMatchFail(bool dologging)
+        {
+            _logOnMatchFail = dologging;
+            return this;
+        }
+
+        /// <summary>
         /// The respond with.
         /// </summary>
         /// <param name="provider">The provider.</param>
         public void RespondWith(IResponseProvider provider)
         {
             var mappingGuid = _guid ?? Guid.NewGuid();
-            _registrationCallback(new Mapping(mappingGuid, _title, _path, _requestMatcher, provider, _priority, _scenario, _executionConditionState, _nextState));
+            _registrationCallback(new Mapping(mappingGuid, _title, _path, _requestMatcher, provider, _priority, _scenario, _executionConditionState, _nextState, _logOnMatchFail));
         }
 
         /// <see cref="IRespondWithAProvider.WithGuid(string)"/>
